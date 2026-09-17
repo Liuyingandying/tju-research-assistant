@@ -6,7 +6,7 @@ PROJECT_ROOT = Path(SPECPATH).resolve()
 if not (PROJECT_ROOT / "main.py").is_file():
     PROJECT_ROOT = PROJECT_ROOT.parent
 SOURCE_ROOT = PROJECT_ROOT / "src"
-PACKAGE_VERSION = os.environ.get("TJU_PACKAGE_VERSION", "v0.17-test2")
+PACKAGE_VERSION = os.environ.get("TJU_PACKAGE_VERSION", "v0.18-rc")
 PACKAGE_NAME = f"TJU_Info_Retrieval_{PACKAGE_VERSION}"
 
 datas = [

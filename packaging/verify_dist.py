@@ -62,7 +62,7 @@ def main() -> int:
     parser.add_argument("dist", type=Path)
     parser.add_argument("--development-root", required=True)
     parser.add_argument("--zip", type=Path)
-    parser.add_argument("--expected-root", default="TJU_Info_Retrieval_v0.17-test2")
+    parser.add_argument("--expected-root", default="TJU_Info_Retrieval_v0.18-rc")
     args = parser.parse_args()
     errors = verify_directory(args.dist.resolve(), args.development_root)
     if args.zip:

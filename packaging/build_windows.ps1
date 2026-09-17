@@ -1,8 +1,8 @@
 [CmdletBinding()]
 param(
     [string]$Python = "python",
-    [ValidatePattern('^v[0-9]+\.[0-9]+-test[0-9]+$')]
-    [string]$Version = "v0.17-test2"
+    [ValidatePattern('^v[0-9]+\.[0-9]+-(test[0-9]+|rc[0-9]*)$')]
+    [string]$Version = "v0.18-rc"
 )
 
 $ErrorActionPreference = "Stop"
@@ -45,25 +45,16 @@ if ($LASTEXITCODE -ne 0) { throw "PyInstaller failed with exit code $LASTEXITCOD
 $Commit = (& git -C $ProjectRoot rev-parse HEAD 2>$null)
 if ($LASTEXITCODE -ne 0) { $Commit = "unavailable" }
 $BuildTime = (Get-Date).ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ")
+$PyInstallerVersion = (& $Python -c "import PyInstaller; print(PyInstaller.__version__)")
 $VersionText = @"
 Version:
 $Version
 
 Build type:
-Windows x64 onedir test build
+Windows x64 onedir build
 
 Packaging:
-PyInstaller 6.16.0
-
-UI:
-Responsive / HiDPI hotfix included
-
-Baseline:
-1096 passed
-20 subtests passed
-0 failed
-0 errors
-(current UI Hotfix official clean run)
+PyInstaller $PyInstallerVersion
 
 Build time UTC:
 $BuildTime

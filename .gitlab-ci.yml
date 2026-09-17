@@ -1,3 +1,9 @@
 workflow:
   rules:
     - when: never
+
+disable_pipeline:
+  script:
+    - echo "CI disabled"
+  rules:
+    - when: never

@@ -53,6 +53,13 @@ def _offline_smoke() -> dict:
     narrow_row_counts = [
         window._action_bar._row_a.count(), window._action_bar._row_b.count()
     ]
+    # v0.18 起工具栏按钮数量随功能演进（Dashboard/报告等），改为验证布局性质
+    # 而非固定分布：按钮总数不低于当前版本要求、全部进入行布局、两行均非空。
+    button_total = len(window._action_bar._buttons)
+    buttons_all_laid_out = sum(narrow_row_counts) == button_total
+    rows_nonempty = all(count > 0 for count in narrow_row_counts)
+    min_buttons_current_version = 11
+    buttons_complete = button_total >= min_buttons_current_version
     affiliation_overlap = window.input_author_affiliation.geometry().intersects(
         window.combo_affiliation_mode.geometry()
     )
@@ -68,9 +75,9 @@ def _offline_smoke() -> dict:
     app.processEvents()
     app.processEvents()
     wide_single_row = not window._action_bar._two_rows
-    if not all((narrow_two_rows, narrow_row_counts == [5, 5],
-                not affiliation_overlap, table_visible, buttons_visible,
-                wide_single_row)):
+    if not all((narrow_two_rows, rows_nonempty, buttons_all_laid_out,
+                buttons_complete, not affiliation_overlap, table_visible,
+                buttons_visible, wide_single_row)):
         raise RuntimeError("Responsive / HiDPI frozen UI geometry 检查失败")
     window.close()
     app.processEvents()
@@ -80,6 +87,7 @@ def _offline_smoke() -> dict:
                 "minimum_size": "920x560",
                 "narrow_two_rows": narrow_two_rows,
                 "narrow_row_counts": narrow_row_counts,
+                "button_total": button_total,
                 "affiliation_overlap": affiliation_overlap,
                 "table_visible": table_visible,
                 "buttons_visible": buttons_visible,

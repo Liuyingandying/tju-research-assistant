@@ -45,6 +45,10 @@ GUI 为 PySide6 主窗口 + QThread 后台 Worker（检索 / 详情 / 证据 / �
 环境要求：Windows 10/11，Python **3.10+**，本机已安装 Microsoft Edge。
 
 ```bash
+# 0) 获取源码
+git clone https://gitlab.tju.edu.cn/3024202194/tju-research-assistant.git
+cd tju-research-assistant
+
 # 1) 安装依赖（playwright 直接驱动本机 Edge，无需 playwright install）
 python -m pip install -r requirements.txt
 

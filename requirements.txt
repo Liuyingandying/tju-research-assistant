@@ -1,0 +1,5 @@
+# 运行时依赖
+# - playwright：驱动本机已安装的 Microsoft Edge（无需下载 Chromium）
+# - PySide6：Standalone MVP 桌面 GUI（本机已安装 6.11.2）
+playwright>=1.40
+PySide6>=6.5

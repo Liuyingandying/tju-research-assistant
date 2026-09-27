@@ -8,6 +8,7 @@ endpoint 模板 / model 模板等纯数据，不持有任何状态、不做任�
 | id        | label                      | default_base_url                  | default_model  |
 |-----------|----------------------------|-----------------------------------|----------------|
 | tju_llm   | 天津大学 LLM                | https://ai.tju.edu.cn/api/v3      | tju-llm        |
+| agent2026 | 天津大学 LLM（智能体大赛专属） | https://ai.tju.edu.cn/api/agent2026/gitlab-102-agent2026-qwen-agent | tju-llm |
 | deepseek  | DeepSeek API               | https://api.deepseek.com           | deepseek-chat  |
 | custom    | 自定义 OpenAI Compatible   | （空，由用户填写）                 | （空，由用户填写） |
 
@@ -23,12 +24,14 @@ from __future__ import annotations
 
 # Provider id 常量
 PROVIDER_TJU = "tju_llm"
+PROVIDER_AGENT2026 = "agent2026"
 PROVIDER_DEEPSEEK = "deepseek"
 PROVIDER_CUSTOM = "custom"
 
 # 展示顺序（设置页下拉框顺序）
 PROVIDER_IDS: tuple[str, ...] = (
     PROVIDER_TJU,
+    PROVIDER_AGENT2026,
     PROVIDER_DEEPSEEK,
     PROVIDER_CUSTOM,
 )
@@ -48,6 +51,21 @@ _PROVIDERS: dict[str, dict] = {
         "id": PROVIDER_TJU,
         "label": "天津大学 LLM",
         "default_base_url": "https://ai.tju.edu.cn/api/v3",
+        "default_model": "tju-llm",
+        "api_key_env": "TJU_INFO_LLM_API_KEY",
+        "endpoint_template": _ENDPOINT_TEMPLATE,
+    },
+    PROVIDER_AGENT2026: {
+        # 智能体大赛实际分配的专属 endpoint（2026-09-27 人工确认）。
+        # 注意：路径中的 gitlab-102-agent2026-qwen-agent 是比赛平台生成时
+        # 的原始项目标识，与 GitLab 仓库后来改名的 agent2026-research-assistant
+        # 无关，禁止按仓库名"纠正"此地址。
+        "id": PROVIDER_AGENT2026,
+        "label": "天津大学 LLM（智能体大赛专属）",
+        "default_base_url": (
+            "https://ai.tju.edu.cn/api/agent2026/"
+            "gitlab-102-agent2026-qwen-agent"
+        ),
         "default_model": "tju-llm",
         "api_key_env": "TJU_INFO_LLM_API_KEY",
         "endpoint_template": _ENDPOINT_TEMPLATE,
@@ -130,6 +148,7 @@ def provider_options() -> list[tuple[str, str]]:
 
 __all__ = [
     "PROVIDER_TJU",
+    "PROVIDER_AGENT2026",
     "PROVIDER_DEEPSEEK",
     "PROVIDER_CUSTOM",
     "PROVIDER_IDS",

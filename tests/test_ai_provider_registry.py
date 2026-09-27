@@ -11,6 +11,7 @@ from tju_info_retrieval.services.ai_provider_registry import (
     PROVIDER_DEEPSEEK,
     PROVIDER_IDS,
     PROVIDER_TJU,
+    PROVIDER_AGENT2026,
     default_api_key_env,
     default_base_url,
     default_model,
@@ -24,9 +25,11 @@ from tju_info_retrieval.services.ai_provider_registry import (
 
 
 class TestProviderIds:
-    def test_three_builtin_providers(self):
-        assert PROVIDER_IDS == ("tju_llm", "deepseek", "custom")
+    def test_builtin_providers(self):
+        assert PROVIDER_IDS == (
+            "tju_llm", "agent2026", "deepseek", "custom")
         assert PROVIDER_TJU == "tju_llm"
+        assert PROVIDER_AGENT2026 == "agent2026"
         assert PROVIDER_DEEPSEEK == "deepseek"
         assert PROVIDER_CUSTOM == "custom"
 
@@ -65,6 +68,7 @@ class TestProviderOptions:
         options = provider_options()
         assert options == [
             ("天津大学 LLM", "tju_llm"),
+            ("天津大学 LLM（智能体大赛专属）", "agent2026"),
             ("DeepSeek API", "deepseek"),
             ("自定义 OpenAI Compatible", "custom"),
         ]

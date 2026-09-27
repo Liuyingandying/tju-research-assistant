@@ -110,7 +110,8 @@ class TestFixtures:
         assert _outside_repo(path)
         store.save(_record("夹具论文"))
         assert len(store.load_all()) == 1
-        assert not (project_root() / "data" / "library.json").samefile(path)
+        assert path.resolve() != (
+            project_root() / "data" / "library.json").resolve()
 
     def test_isolated_profile_store(self, isolated_profile_store):
         store, path = isolated_profile_store

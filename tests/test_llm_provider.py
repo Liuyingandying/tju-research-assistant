@@ -197,6 +197,10 @@ class TestSecretManagement(unittest.TestCase):
         self.assertTrue(provider.api_key_configured)
         provider.validate()
 
+    @unittest.skipUnless(
+        EXAMPLE_PATH.is_file(),
+        "runtime/summary_provider.example.json 属开发机未跟踪文件，"
+        "发布仓库克隆不存在（存在时执行真实泄露检查）")
     def test_example_has_no_real_credentials(self):
         example = EXAMPLE_PATH.read_text(encoding="utf-8")
         self.assertNotIn("sk-", example)

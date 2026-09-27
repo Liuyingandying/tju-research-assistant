@@ -210,15 +210,17 @@ class TestSettingsDialogProvider(_IsolatedCase):
         from tju_info_retrieval.ui.settings_dialog import SettingsDialog
         return SettingsDialog(manager=self._mgr())
 
-    def test_three_provider_options(self):
+    def test_provider_options(self):
         dlg = self._dialog()
         labels = [dlg.combo_service.itemText(i)
                   for i in range(dlg.combo_service.count())]
-        assert labels == ["天津大学 LLM", "DeepSeek API",
+        assert labels == ["天津大学 LLM",
+                          "天津大学 LLM（智能体大赛专属）",
+                          "DeepSeek API",
                           "自定义 OpenAI Compatible"]
         ids = [dlg.combo_service.itemData(i)
                for i in range(dlg.combo_service.count())]
-        assert ids == ["tju_llm", "deepseek", "custom"]
+        assert ids == ["tju_llm", "agent2026", "deepseek", "custom"]
         dlg.deleteLater()
 
     def test_select_deepseek_autofills(self):

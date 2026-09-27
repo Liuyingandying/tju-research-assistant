@@ -46,7 +46,7 @@ GUI 为 PySide6 主窗口 + QThread 后台 Worker（检索 / 详情 / 证据 / �
 
 ```bash
 # 0) 获取源码
-git clone https://gitlab.tju.edu.cn/3024202194/tju-research-assistant.git
+git clone https://gitlab.tju.edu.cn/3024202194/agent2026-research-assistant.git
 cd tju-research-assistant
 
 # 1) 安装依赖（playwright 直接驱动本机 Edge，无需 playwright install）

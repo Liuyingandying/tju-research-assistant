@@ -71,7 +71,8 @@ python main.py
 
 | Provider | 用途 | 密钥环境变量 |
 |---|---|---|
-| TJU LLM | 天津大学校内部署 LLM 服务 | `TJU_INFO_LLM_API_KEY` |
+| TJU LLM | 天津大学校内部署 LLM 服务（普通网关 `/api/v3`） | `TJU_INFO_LLM_API_KEY` |
+| TJU LLM（智能体大赛专属） | 智能体大赛为本项目分配的专属 endpoint（`/api/agent2026/…`，详见 `DESIGN.md` §4） | `TJU_INFO_LLM_API_KEY` |
 | DeepSeek | DeepSeek 开放平台 | `DEEPSEEK_API_KEY` |
 | OpenAI Compatible | 任意 OpenAI 兼容接口（自定义 base_url / model） | `TJU_INFO_LLM_API_KEY` |
 
@@ -84,6 +85,9 @@ python main.py
 - 可通过环境变量直接注入密钥；
 - **API Key 绝不进入仓库**：仓库与发布包中不存在任何真实密钥、登录态或个人数据
   （发布前由 `tools/check_release_data.py` 强制扫描把关）。
+- 智能体大赛提交使用「天津大学 LLM（智能体大赛专属）」Provider：其专属
+  endpoint 已内置（`DESIGN.md` §4），API Key 仍由比赛发放的凭据经上述安全
+  机制注入，不写入源码。
 
 ## 5. 开发说明
 

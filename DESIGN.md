@@ -78,7 +78,7 @@ JSON 存储，与代码严格分离。
   `OpenAICompatibleProvider` 发出，最终 URL 为
   `https://ai.tju.edu.cn/api/agent2026/gitlab-102-agent2026-qwen-agent/chat/completions`；
 - 普通 Provider（tju_llm=`/api/v3`、DeepSeek、自定义）行为不变，回归测试覆盖；
-- 认证仍为 `Authorization: Bearer <key>`，key 经既有 credential_store 链路
+- 认证仍为 Bearer 形式的 Authorization 认证头（密钥仅内存注入），key 经既有 credential_store 链路
   （keyring → DPAPI → 内存），日志与错误信息中不出现明文。
 
 ### 4.3 验证
